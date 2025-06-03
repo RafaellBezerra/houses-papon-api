@@ -1,0 +1,6 @@
+@HousesPapon.API_HostAddress = http://localhost:5286
+
+GET {{HousesPapon.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

@@ -1,0 +1,9 @@
+﻿namespace HousesPapon.Communication.Responses
+{
+    public class ResponseError
+    {
+        public List<string> ErrorMessages { get; set; }
+        public ResponseError(List<string> errorMessages) => ErrorMessages = errorMessages;
+        public ResponseError(string errorMessage) => ErrorMessages = [errorMessage];
+    }
+}
