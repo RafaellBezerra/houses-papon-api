@@ -1,6 +1,6 @@
 [build]
 builder = "dockerfile"
-dockerfilePath = "./Dockerfile"
+dockerfilePath = "./src/HousesPapon.API/Dockerfile"
 
 [deploy]
 restartPolicyType = "always"
