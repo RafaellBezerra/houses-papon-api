@@ -2,10 +2,10 @@
 
 # This stage is used when running from VS in fast mode (Default for Debug configuration)
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
-USER $APP_UID
+
 WORKDIR /app
 EXPOSE 8080
-EXPOSE 8081
+ENV ASPNETCORE_URLS="http://+:8080"
 
 
 # This stage is used to build the service project
@@ -18,15 +18,16 @@ COPY ["src/HousesPapon.Communication/HousesPapon.Communication.csproj", "src/Hou
 COPY ["src/HousesPapon.Domain/HousesPapon.Domain.csproj", "src/HousesPapon.Domain/"]
 COPY ["src/HousesPapon.Exception/HousesPapon.Exception.csproj", "src/HousesPapon.Exception/"]
 COPY ["src/HousesPapon.Infrastructure/HousesPapon.Infrastructure.csproj", "src/HousesPapon.Infrastructure/"]
-RUN dotnet restore "./src/HousesPapon.API/HousesPapon.API.csproj"
+RUN dotnet restore "src/HousesPapon.API/HousesPapon.API.csproj"
 COPY . .
 WORKDIR "/src/src/HousesPapon.API"
-RUN dotnet build "./HousesPapon.API.csproj" -c $BUILD_CONFIGURATION -o /app/build
+RUN dotnet build "HousesPapon.API.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 # This stage is used to publish the service project to be copied to the final stage
 FROM build AS publish
 ARG BUILD_CONFIGURATION=Release
-RUN dotnet publish "./HousesPapon.API.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "HousesPapon.API.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
+
 
 # This stage is used in production or when running from VS in regular mode (Default when not using the Debug configuration)
 FROM base AS final
