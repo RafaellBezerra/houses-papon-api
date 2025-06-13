@@ -45,6 +45,8 @@ app.UseAuthorization();
 
 app.MapControllers();
 
+app.MapGet("/health", () => Results.Ok("ok"));
+
 await MigrateDatabase();
 
 app.Run();
