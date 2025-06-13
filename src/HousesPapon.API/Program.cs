@@ -47,7 +47,7 @@ app.MapControllers();
 
 app.MapGet("/health", () => Results.Ok("ok"));
 
-await MigrateDatabase();
+// await MigrateDatabase();
 
 app.Run();
 
