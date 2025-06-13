@@ -4,4 +4,7 @@ dockerfilePath = "./src/HousesPapon.API/Dockerfile"
 
 [deploy]
 restartPolicyType = "always"
-healthcheckPath = "/swagger"
+healthcheckPath = "/swagger/index.html"
+
+[env]
+ASPNETCORE_ENVIRONMENT = "Production"

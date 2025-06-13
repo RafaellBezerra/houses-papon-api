@@ -10,6 +10,8 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.WebHost.UseUrls("http://+:8080");
+
 builder.Services.AddAuthentication(config =>
 {
     config.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
@@ -32,7 +34,7 @@ builder.Services.AddApplication();
 
 var app = builder.Build();
 
-if (app.Environment.IsDevelopment())
+if (app.Environment.IsDevelopment() || app.Environment.IsProduction())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
