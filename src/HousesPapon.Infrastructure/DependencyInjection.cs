@@ -34,7 +34,7 @@ namespace HousesPapon.Infrastructure
             var version = ServerVersion.AutoDetect(connectionString);
 
             Console.WriteLine(connectionString);
-                Console.WriteLine(version);
+            Console.WriteLine(version);
 
             services.AddDbContext<HousesPaponDbContext>(x => x.UseMySql(connectionString, version));
         }
