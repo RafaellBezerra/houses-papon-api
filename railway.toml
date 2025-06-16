@@ -1,9 +1,0 @@
-[build]
-builder = "dockerfile"
-dockerfilePath = "./src/HousesPapon.API/Dockerfile"
-
-[deploy]
-restartPolicyType = "always"
-
-[env]
-ASPNETCORE_ENVIRONMENT = "Production"
