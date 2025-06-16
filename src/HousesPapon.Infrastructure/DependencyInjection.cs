@@ -30,12 +30,8 @@ namespace HousesPapon.Infrastructure
 
         private static void AddDbContext(IServiceCollection services, IConfiguration configuration)
         {
-           // var connectionString = configuration.GetConnectionString("DefaultConnection"); 
-            var connectionString = "Server=trolley.proxy.rlwy.net;Port=35434;Database=railway;Uid=root;Pwd=AgIxtDFnVWFFtwUZpJLnGDusyCUnoWhQ;"
-            var version = ServerVersion.AutoDetect(connectionString);
-
-            Console.WriteLine(connectionString);
-            Console.WriteLine(version);
+            var connectionString = configuration.GetConnectionString("DefaultConnection");
+            var version = new MySqlServerVersion(new Version(8, 0, 41));
 
             services.AddDbContext<HousesPaponDbContext>(x => x.UseMySql(connectionString, version));
         }

@@ -10,8 +10,6 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.WebHost.UseUrls("http://+:8080");
-
 builder.Services.AddAuthentication(config =>
 {
     config.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
@@ -34,18 +32,18 @@ builder.Services.AddApplication();
 
 var app = builder.Build();
 
-if (app.Environment.IsDevelopment() || app.Environment.IsProduction())
+if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
 
+app.UseHttpsRedirection();
+
 app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
-
-app.MapGet("/health", () => Results.Ok("ok"));
 
 await MigrateDatabase();
 
