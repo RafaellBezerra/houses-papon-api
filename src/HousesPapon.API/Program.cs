@@ -30,7 +30,6 @@ builder.Services.AddRouting(x => x.LowercaseUrls = true);
 builder.Services.AddMvc(f => f.Filters.Add(typeof(ExceptionFilter)));
 
 builder.Services.AddInfrastructure(builder.Configuration);
-Console.WriteLine(builder.Configuration.GetConnectionString("DefaultConnection"));
 builder.Services.AddApplication();
 
 var app = builder.Build();
