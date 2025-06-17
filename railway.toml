@@ -1,0 +1,7 @@
+[build]
+builder = "dockerfile"
+dockerfilePath = "./HousesPapon/HousesPapon.API/Dockerfile"
+
+[deploy]
+startCommand = "dotnet HousesPapon.API.dll"
+restartPolicyType = "never"
