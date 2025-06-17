@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 
 var builder = WebApplication.CreateBuilder(args);
 
-var port = Environment.GetEnvironmentVariable("PORT") ?? "8081";
+var port = Environment.GetEnvironmentVariable("PORT") ?? "8080";
 builder.WebHost.UseUrls($"http://*:{port}");
 
 builder.Services.AddControllers();
@@ -35,7 +35,7 @@ builder.Services.AddApplication();
 
 var app = builder.Build();
 
-app.UseHealthChecks("/health");
+app.UseHealthChecks("/swagger/index.html");
 
 app.UseSwagger();
 app.UseSwaggerUI();
