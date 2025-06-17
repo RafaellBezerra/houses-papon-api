@@ -20,17 +20,17 @@ namespace HousesPapon.Infrastructure
 {
     public static class DependencyInjection
     {
-        public static void AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
+        public static void AddInfrastructure(this IServiceCollection services)
         {
-            AddDbContext(services, configuration);
+            AddDbContext(services);
             AddRepositories(services);
 
             services.AddScoped<IPasswordEncripter, PasswordEncripter>();
         }
 
-        private static void AddDbContext(IServiceCollection services, IConfiguration configuration)
+        private static void AddDbContext(IServiceCollection services)
         {
-            var connectionString = configuration.GetConnectionString("DefaultConnection");
+            var connectionString = Environment.GetEnvironmentVariable("MYSQLCONNECTION");
             var version = new MySqlServerVersion(new Version(8, 0, 41));
 
             services.AddDbContext<HousesPaponDbContext>(x => x.UseMySql(connectionString, version));

@@ -27,7 +27,7 @@ builder.Services.AddAuthentication(config =>
 builder.Services.AddRouting(x => x.LowercaseUrls = true);
 builder.Services.AddMvc(f => f.Filters.Add(typeof(ExceptionFilter)));
 
-builder.Services.AddInfrastructure(builder.Configuration);
+builder.Services.AddInfrastructure();
 builder.Services.AddApplication();
 
 var app = builder.Build();
