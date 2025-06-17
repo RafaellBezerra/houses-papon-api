@@ -1,6 +1,6 @@
 [build]
 builder = "dockerfile"
-dockerfilePath = "./HousesPapon/HousesPapon.API/Dockerfile"
+dockerfilePath = "./HousesPapon/src/HousesPapon.API/Dockerfile"
 
 [deploy]
 startCommand = "dotnet HousesPapon.API.dll"
