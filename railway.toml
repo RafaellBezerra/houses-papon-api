@@ -3,5 +3,6 @@ builder = "dockerfile"
 dockerfilePath = "./src/HousesPapon.API/Dockerfile"
 
 [deploy]
-startCommand = "dotnet HousesPapon.API.dll"
-restartPolicyType = "never"
+startCommand = "dotnet", "HousesPapon.API.dll"
+restartPolicyType = "always"
+healthcheckPath = "/health"

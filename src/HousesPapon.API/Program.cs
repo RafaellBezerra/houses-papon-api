@@ -35,6 +35,8 @@ builder.Services.AddApplication();
 
 var app = builder.Build();
 
+app.UseHealthChecks("/health");
+
 app.UseSwagger();
 app.UseSwaggerUI();
 
