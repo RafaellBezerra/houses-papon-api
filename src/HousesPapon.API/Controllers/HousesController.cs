@@ -24,7 +24,6 @@ namespace HousesPapon.API.Controllers
             if (response.Houses.Count != 0) return Ok(response);
 
             return NoContent();
-
         }
 
         [HttpGet]
