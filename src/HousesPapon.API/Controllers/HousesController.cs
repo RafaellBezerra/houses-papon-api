@@ -23,7 +23,7 @@ namespace HousesPapon.API.Controllers
             var response = await useCase.Execute();
             if (response.Houses.Count != 0) return Ok(response);
 
-            return NoContent();
+            return Ok(response);
         }
 
         [HttpGet]
