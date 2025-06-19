@@ -21,7 +21,7 @@ namespace HousesPapon.API.Controllers
         public async Task<IActionResult> GetAllHouses([FromServices] IGetAllHousesUseCase useCase)
         {
             var response = await useCase.Execute();
-            if (response.Houses.Count != 0) return Ok(response);
+            if (response.Count != 0) return Ok(response);
 
             return Ok(response);
         }

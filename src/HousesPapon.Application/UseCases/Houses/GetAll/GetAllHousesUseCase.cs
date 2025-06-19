@@ -11,21 +11,20 @@ namespace HousesPapon.Application.UseCases.Houses.GetAll
             _repository = repository;
         }
 
-        public async Task<ResponseGetAllHouses> Execute()
+        public async Task<List<ResponseGetAllHouses>> Execute()
         {
             var houses = await _repository.GetAll();
 
-            return new ResponseGetAllHouses
+            return houses.Select(x => new ResponseGetAllHouses
             {
-                Houses = houses.Select(x => new ResponseForGetAllHouses
-                {
-                    Id = x.Id,
-                    Number = x.Number,
-                    Price = x.Price,
-                    CreatedAt = x.CreatedAt,
-                    Tenant = x.Tenant?.Name
-                }).ToList()
-            };
+                Id = x.Id,
+                Number = x.Number,
+                Price = x.Price,
+                CreatedAt = x.CreatedAt,
+                Tenant = x.Tenant?.Name
+            }).ToList();
         }
     }
 }
+
+

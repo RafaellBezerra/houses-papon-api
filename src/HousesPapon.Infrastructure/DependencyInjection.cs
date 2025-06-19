@@ -13,8 +13,8 @@ using HousesPapon.Infrastructure.DataAccess.Repositories.CommonUtilities;
 using HousesPapon.Infrastructure.Security.Cookies;
 using HousesPapon.Infrastructure.Security.Cryptografy;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 
 namespace HousesPapon.Infrastructure
 {
