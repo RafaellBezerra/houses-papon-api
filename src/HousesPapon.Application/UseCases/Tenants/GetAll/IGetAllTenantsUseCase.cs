@@ -4,6 +4,6 @@ namespace HousesPapon.Application.UseCases.Tenants.GetAll
 {
     public interface IGetAllTenantsUseCase
     {
-        Task<ResponseGetAllTenants> Execute();
+        Task<List<ResponseGetAllTenants>> Execute();
     }
 }

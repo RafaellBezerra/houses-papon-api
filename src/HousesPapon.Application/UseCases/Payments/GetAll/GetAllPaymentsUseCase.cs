@@ -11,22 +11,19 @@ namespace HousesPapon.Application.UseCases.Payments.GetAll
             _repository = repository;
         }
 
-        public async Task<ResponseGetAllPayments> Execute()
+        public async Task<List<ResponseGetAllPayments>> Execute()
         {
             var payments = await _repository.GetAll();
 
-            return new ResponseGetAllPayments
+            return payments.Select(t => new ResponseGetAllPayments
             {
-                Payments = payments.Select(t => new ResponseForGetAllPayments
-                {
-                    Id = t.Id,
-                    Amount = t.Amount,
-                    CreatedAt = t.CreatedAt,
-                    HouseId = t.HouseId,
-                    TenantId = t.TenantId,
-                    PaymentMethod = (Communication.Enums.PaymentMethod)t.PaymentMethod,
-                }).ToList()
-            };
+                Id = t.Id,
+                Amount = t.Amount,
+                CreatedAt = t.CreatedAt,
+                HouseId = t.HouseId,
+                TenantId = t.TenantId,
+                PaymentMethod = (Communication.Enums.PaymentMethod)t.PaymentMethod,
+            }).ToList();
         }
     }
 }

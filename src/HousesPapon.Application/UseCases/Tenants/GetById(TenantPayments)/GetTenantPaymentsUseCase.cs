@@ -16,22 +16,19 @@ namespace HousesPapon.Application.UseCases.Tenants.GetById_TenantPayments_
             _existenceCheckerRepository = existenceCheckerRepository;
         }
 
-        public async Task<ResponseGetTenantPayments> Execute(long Id)
+        public async Task<List<ResponseGetTenantPayments>> Execute(long Id)
         {
             var tenantExist = await _existenceCheckerRepository.TenantExist(Id);
             if (!tenantExist) throw new NotFoundException(ResourceErrorMessages.TENANT_NOT_FOUND);
 
             var payments = await _repository.GetTenantPaymentsById(Id);
 
-            return new ResponseGetTenantPayments
+            return payments.Select(x => new ResponseGetTenantPayments
             {
-                Payments = payments.Select(x => new ResponseForGetTenantPayments
-                {
-                    Amount = x.Amount,
-                    CreatedAt = x.CreatedAt,
-                    PaymentMethod = (Communication.Enums.PaymentMethod)x.PaymentMethod
-                }).ToList()
-            };
+                Amount = x.Amount,
+                CreatedAt = x.CreatedAt,
+                PaymentMethod = (Communication.Enums.PaymentMethod)x.PaymentMethod
+            }).ToList();
         }
     }
 }

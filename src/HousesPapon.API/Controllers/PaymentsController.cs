@@ -26,14 +26,11 @@ namespace HousesPapon.API.Controllers
         }
 
         [HttpGet]
-        [ProducesResponseType(typeof(ResponseForGetAllPayments), StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(typeof(List<ResponseGetAllPayments>), StatusCodes.Status200OK)]
         public async Task<IActionResult> GetAll([FromServices] IGetAllPaymentsUseCase useCase)
         {
             var response = await useCase.Execute();
-            if (response.Payments.Count != 0) return Ok(response);
-
-            return NoContent();
+            return Ok(response);
         }
 
         [HttpGet]
@@ -48,23 +45,23 @@ namespace HousesPapon.API.Controllers
         
         [HttpDelete]
         [Route("{Id}")]
-        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ResponseError), StatusCodes.Status404NotFound)]
         public async Task<IActionResult> Delete([FromRoute] long Id, [FromServices] IDeletePaymentUseCase useCase)
         {
             await useCase.Execute(Id);
-            return NoContent();
+            return Ok();
         }
         
         [HttpPut]
         [Route("{Id}")]
-        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ResponseError), StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(ResponseError), StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> Update([FromRoute] long Id, [FromServices] IUpdatePaymentUseCase useCase, [FromBody] RequestPayment request)
         {
             await useCase.Execute(request, Id);
-            return NoContent();
+            return Ok();
         }
     }
 }

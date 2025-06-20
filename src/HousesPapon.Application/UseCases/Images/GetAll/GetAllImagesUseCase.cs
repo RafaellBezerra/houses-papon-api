@@ -10,20 +10,17 @@ namespace HousesPapon.Application.UseCases.Images.GetAll
         {
             _repository = repository;
         }
-        public async Task<ResponseGetAllImages> Execute()
+        public async Task<List<ResponseGetAllImages>> Execute()
         {
             var images = await _repository.GetAll();
 
-            return new ResponseGetAllImages
+            return images.Select(i => new ResponseGetAllImages
             {
-                Images = images.Select(i => new ResponseForGetAllImages
-                {
-                    CreatedAt = i.CreatedAt,
-                    HouseId = i.HouseId,
-                    Id = i.Id,
-                    Url = i.Url
-                }).ToList()
-            };
+                CreatedAt = i.CreatedAt,
+                HouseId = i.HouseId,
+                Id = i.Id,
+                Url = i.Url
+            }).ToList();
         }
     }
 }

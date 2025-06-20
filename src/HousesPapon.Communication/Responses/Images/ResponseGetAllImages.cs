@@ -2,6 +2,9 @@
 {
     public class ResponseGetAllImages
     {
-        public List<ResponseForGetAllImages> Images { get; set; } = [];
+        public long Id { get; set; }
+        public string Url { get; set; } = string.Empty;
+        public DateTime CreatedAt { get; set; }
+        public long HouseId { get; set; }
     }
 }

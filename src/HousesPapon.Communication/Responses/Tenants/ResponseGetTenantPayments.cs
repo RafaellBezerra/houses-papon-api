@@ -1,7 +1,11 @@
-﻿namespace HousesPapon.Communication.Responses.Tenants
+﻿using HousesPapon.Communication.Enums;
+
+namespace HousesPapon.Communication.Responses.Tenants
 {
     public class ResponseGetTenantPayments
     {
-        public List<ResponseForGetTenantPayments> Payments { get; set; } = [];
+        public decimal Amount { get; set; }
+        public DateTime CreatedAt { get; set; }
+        public PaymentMethod PaymentMethod { get; set; }
     }
 }

@@ -19,14 +19,11 @@ namespace HousesPapon.API.Controllers
     public class TenantsController : ControllerBase
     {
         [HttpGet]
-        [ProducesResponseType(StatusCodes.Status204NoContent)]
-        [ProducesResponseType(typeof(ResponseForGetAllTenants), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(List<ResponseGetAllTenants>), StatusCodes.Status200OK)]
         public async Task<IActionResult> GetAll([FromServices] IGetAllTenantsUseCase useCase)
         {
             var response = await useCase.Execute();
-            if (response.Tenants.Count != 0) return Ok(response);
-
-            return NoContent();
+            return Ok(response);
         }
 
         [HttpGet]
@@ -42,27 +39,21 @@ namespace HousesPapon.API.Controllers
         [HttpGet]
         [Route("contracts/{Id}")]
         [ProducesResponseType(typeof(ResponseError), StatusCodes.Status404NotFound)]
-        [ProducesResponseType(typeof(ResponseForGetTenantContracts), StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(typeof(List<ResponseGetTenantContracts>), StatusCodes.Status200OK)]
         public async Task<IActionResult> GetTenantContractsById([FromServices] IGetTenantContractsUseCase useCase, [FromRoute] long Id)
         {
             var response = await useCase.Execute(Id);
-            if (response.Contracts.Count != 0) return Ok(response);
-
-            return NoContent();
+            return Ok(response);
         }
 
         [HttpGet]
         [Route("payments/{Id}")]
         [ProducesResponseType(typeof(ResponseError), StatusCodes.Status404NotFound)]
-        [ProducesResponseType(typeof(ResponseForGetTenantPayments), StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(typeof(List<ResponseGetTenantPayments>), StatusCodes.Status200OK)]
         public async Task<IActionResult> GetTenantPaymentsById([FromServices] IGetTenantPaymentsUseCase useCase, [FromRoute] long Id)
         {
             var response = await useCase.Execute(Id);
-            if (response.Payments.Count != 0) return Ok(response);
-
-            return NoContent();
+            return Ok(response);
         }
 
         [HttpPost]
@@ -77,11 +68,11 @@ namespace HousesPapon.API.Controllers
         [HttpDelete]
         [Route("{Id}")]
         [ProducesResponseType(typeof(ResponseError), StatusCodes.Status404NotFound)]
-        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IActionResult> Delete([FromRoute] long Id, [FromServices] IDeleteTenantUseCase useCase)
         {
             await useCase.Execute(Id);
-            return NoContent();
+            return Ok();
         }
 
         [HttpPut]

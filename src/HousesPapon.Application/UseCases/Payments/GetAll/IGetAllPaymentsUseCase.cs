@@ -4,6 +4,6 @@ namespace HousesPapon.Application.UseCases.Payments.GetAll
 {
     public interface IGetAllPaymentsUseCase
     {
-        Task<ResponseGetAllPayments> Execute();
+        Task<List<ResponseGetAllPayments>> Execute();
     }
 }

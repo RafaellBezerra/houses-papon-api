@@ -4,6 +4,6 @@ namespace HousesPapon.Application.UseCases.Images.GetAll
 {
     public interface IGetAllImagesUseCase
     {
-        Task<ResponseGetAllImages> Execute();
+        Task<List<ResponseGetAllImages>> Execute();
     }
 }

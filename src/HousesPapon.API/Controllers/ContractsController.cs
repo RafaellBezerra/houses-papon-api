@@ -28,22 +28,19 @@ namespace HousesPapon.API.Controllers
         [HttpDelete]
         [Route("{Id}")]
         [ProducesResponseType(typeof(ResponseError), StatusCodes.Status404NotFound)]
-        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IActionResult> Delete([FromServices] IDeleteContractUseCase useCase, [FromRoute] long Id)
         {
             await useCase.Execute(Id);
-            return NoContent();
+            return Ok();
         }
 
         [HttpGet]
-        [ProducesResponseType(typeof(ResponseForGetAllContracts), StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(typeof(List<ResponseGetAllContracts>), StatusCodes.Status200OK)]
         public async Task<IActionResult> GetAll([FromServices] IGetAllContractsUseCase useCase)
         {
             var response = await useCase.Execute();
-            if (response.Contracts.Count != 0) return Ok(response);
-
-            return NoContent();
+            return Ok(response);
         }
 
         [HttpGet]
@@ -60,11 +57,11 @@ namespace HousesPapon.API.Controllers
         [Route("{Id}")]
         [ProducesResponseType(typeof(ResponseError), StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(ResponseError), StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IActionResult> Update([FromServices] IUpdateContractUseCase useCase, [FromRoute] long Id, [FromBody] RequestContract request)
         {
             await useCase.Execute(Id, request);
-            return NoContent();
+            return Ok();
         }
     }
 }

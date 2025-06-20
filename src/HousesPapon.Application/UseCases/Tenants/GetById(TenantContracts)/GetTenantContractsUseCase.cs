@@ -16,23 +16,20 @@ namespace HousesPapon.Application.UseCases.Tenants.GetById_TenantContracts_
             _existenceCheckerRepository = existenceCheckerRepository;
         }
 
-        public async Task<ResponseGetTenantContracts> Execute(long Id)
+        public async Task<List<ResponseGetTenantContracts>> Execute(long Id)
         {
             var tenantExist = await _existenceCheckerRepository.TenantExist(Id);
             if (!tenantExist) throw new NotFoundException(ResourceErrorMessages.TENANT_NOT_FOUND);
 
             var contracts = await _repository.GetTenantContractsById(Id);
 
-            return new ResponseGetTenantContracts
+            return contracts.Select(x => new ResponseGetTenantContracts
             {
-                Contracts = contracts.Select(x => new ResponseForGetTenantContracts
-                {
-                    BeginDate = x.BeginDate,
-                    CreatedAt = x.CreatedAt,
-                    EndDate = x.EndDate,
-                    Url = x.Url
-                }).ToList()
-            };
+                BeginDate = x.BeginDate,
+                CreatedAt = x.CreatedAt,
+                EndDate = x.EndDate,
+                Url = x.Url
+            }).ToList();
         }
     }
 }

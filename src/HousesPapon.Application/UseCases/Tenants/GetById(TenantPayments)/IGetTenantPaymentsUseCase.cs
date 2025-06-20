@@ -4,6 +4,6 @@ namespace HousesPapon.Application.UseCases.Tenants.GetById_TenantPayments_
 {
     public interface IGetTenantPaymentsUseCase
     {
-        Task<ResponseGetTenantPayments> Execute(long Id);
+        Task<List<ResponseGetTenantPayments>> Execute(long Id);
     }
 }

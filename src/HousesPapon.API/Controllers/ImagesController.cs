@@ -27,23 +27,20 @@ namespace HousesPapon.API.Controllers
 
         [HttpDelete]
         [Route("{Id}")]
-        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ResponseError), StatusCodes.Status404NotFound)]
         public async Task<IActionResult> Delete([FromRoute] long Id, [FromServices] IDeleteImageUseCase useCase)
         {
             await useCase.Execute(Id);
-            return NoContent();
+            return Ok();
         }
 
         [HttpGet]
-        [ProducesResponseType(typeof(ResponseForGetAllImages), StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(typeof(List<ResponseGetAllImages>), StatusCodes.Status200OK)]
         public async Task<IActionResult> GetAll([FromServices] IGetAllImagesUseCase useCase)
         {
             var response = await useCase.Execute();
-            if (response.Images.Count != 0) return Ok(response);
-
-            return NoContent();
+            return Ok(response);
         }
 
         [HttpGet]

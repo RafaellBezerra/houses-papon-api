@@ -11,23 +11,20 @@ namespace HousesPapon.Application.UseCases.Tenants.GetAll
             _repository = repository;
         }
 
-        public async Task<ResponseGetAllTenants> Execute()
+        public async Task<List<ResponseGetAllTenants>> Execute()
         {
             var tenants = await _repository.GetAll();
 
-            return new ResponseGetAllTenants
+            return tenants.Select(x => new ResponseGetAllTenants
             {
-                Tenants = tenants.Select(x => new ResponseForGetAllTenants
-                {
-                    Id = x.Id,
-                    CreatedAt = x.CreatedAt,
-                    EntranceDate = x.EntranceDate,
-                    IsInDebit = x.IsInDebit,
-                    Name = x.Name,
-                    PayDay = x.PayDay,
-                    HouseId = x.HouseId,
-                }).ToList()
-            };
+                Id = x.Id,
+                CreatedAt = x.CreatedAt,
+                EntranceDate = x.EntranceDate,
+                IsInDebit = x.IsInDebit,
+                Name = x.Name,
+                PayDay = x.PayDay,
+                HouseId = x.HouseId,
+            }).ToList();
         }
     }
 }
