@@ -16,13 +16,10 @@ namespace HousesPapon.API.Controllers
     public class HousesController : ControllerBase
     {
         [HttpGet]
-        [ProducesResponseType(StatusCodes.Status204NoContent)]
-        [ProducesResponseType(typeof(ResponseForGetAllHouses), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(List<ResponseGetAllHouses>), StatusCodes.Status200OK)]
         public async Task<IActionResult> GetAllHouses([FromServices] IGetAllHousesUseCase useCase)
         {
             var response = await useCase.Execute();
-            if (response.Count != 0) return Ok(response);
-
             return Ok(response);
         }
 
@@ -38,15 +35,14 @@ namespace HousesPapon.API.Controllers
 
         [HttpGet]
         [Route("payments/{Id}")]
-        [ProducesResponseType(typeof(ResponseGetHouseById), StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(typeof(List<ResponseGetHousePayments>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ResponseError), StatusCodes.Status404NotFound)]
         public async Task<IActionResult> GetHousePaymentsById([FromRoute] long Id, [FromServices] IGetHousePaymentsUseCase useCase)
         {
             var response = await useCase.Execute(Id);
-            if (response.Payments.Count != 0) return Ok(response);
+            if (response.Count != 0) return Ok(response);
 
-            return NoContent();
+            return Ok(response);
         }
 
         [HttpGet]
