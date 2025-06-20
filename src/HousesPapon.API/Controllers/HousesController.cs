@@ -40,34 +40,26 @@ namespace HousesPapon.API.Controllers
         public async Task<IActionResult> GetHousePaymentsById([FromRoute] long Id, [FromServices] IGetHousePaymentsUseCase useCase)
         {
             var response = await useCase.Execute(Id);
-            if (response.Count != 0) return Ok(response);
-
             return Ok(response);
         }
 
         [HttpGet]
         [Route("contracts/{Id}")]
         [ProducesResponseType(typeof(ResponseGetHouseById), StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(typeof(ResponseError), StatusCodes.Status404NotFound)]
         public async Task<IActionResult> GetHouseContractById([FromServices] IGetHouseContractsUseCase useCase, [FromRoute] long Id)
         {
             var response = await useCase.Execute(Id);
-            if (response.Contracts.Count != 0) return Ok(response);
-
-            return NoContent();
+            return Ok(response);
         }
 
         [HttpGet]
         [Route("availableHouses")]
-        [ProducesResponseType(typeof(ResponseForGetAvailableHouses), StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(typeof(List<ResponseGetAvailableHouses>), StatusCodes.Status200OK)]
         public async Task<IActionResult> GetAvailableHouses([FromServices] IGetAvailableHousesUseCase useCase)
         {
             var response = await useCase.Execute();
-            if (response.Houses.Count != 0) return Ok(response);
-
-            return NoContent();
+            return Ok(response);
         }
     }
 }

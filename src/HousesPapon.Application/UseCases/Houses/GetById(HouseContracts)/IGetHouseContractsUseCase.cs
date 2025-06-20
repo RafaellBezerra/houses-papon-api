@@ -4,6 +4,6 @@ namespace HousesPapon.Application.UseCases.Houses.GetById_HouseContracts_
 {
     public interface IGetHouseContractsUseCase
     {
-        Task<ResponseGetHouseContracts> Execute(long id);
+        Task<List<ResponseGetHouseContracts>> Execute(long id);
     }
 }

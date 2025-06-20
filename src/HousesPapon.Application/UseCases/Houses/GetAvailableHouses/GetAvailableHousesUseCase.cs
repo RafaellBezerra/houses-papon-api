@@ -11,20 +11,17 @@ namespace HousesPapon.Application.UseCases.Houses.GetAvailableHouses
             _repository = repository;
         }
 
-        public async Task<ResponseGetAvailableHouses> Execute()
+        public async Task<List<ResponseGetAvailableHouses>> Execute()
         {
             var availableHouses = await _repository.GetAvailableHouses();
 
-            return new ResponseGetAvailableHouses
+            return availableHouses.Select(h => new ResponseGetAvailableHouses
             {
-                Houses = availableHouses.Select(h => new ResponseForGetAvailableHouses
-                {
-                    Id = h.Id,
-                    CreatedAt = h.CreatedAt,
-                    Number = h.Number,
-                    Price = h.Price
-                }).ToList()
-            };
+                Id = h.Id,
+                CreatedAt = h.CreatedAt,
+                Number = h.Number,
+                Price = h.Price
+            }).ToList();
         }
     }
 }
