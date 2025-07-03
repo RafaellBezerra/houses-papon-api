@@ -11,7 +11,7 @@ namespace HousesPapon.Application.UseCases.Tenants
             RuleFor(t => t.Name).NotEmpty().WithMessage(ResourceErrorMessages.NAME_EMPTY);
             RuleFor(t => t.EntranceDate).LessThanOrEqualTo(DateTime.UtcNow).WithMessage(ResourceErrorMessages.ENTRANCE_DATE_IN_THE_FUTURE);
             RuleFor(t => t.PayDay).GreaterThanOrEqualTo(x => x.EntranceDate).WithMessage(ResourceErrorMessages.INVALID_PAYDAY);
-            RuleFor(t => t.CPF).Length(8).WithMessage(ResourceErrorMessages.INVALID_CPF);
+            RuleFor(t => t.CPF).Length(11).WithMessage(ResourceErrorMessages.INVALID_CPF);
         }
     }
 }
