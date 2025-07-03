@@ -138,6 +138,9 @@
   <data name="INVALID_BEGIN_DATE" xml:space="preserve">
     <value>Begin date cannot be later than the end date</value>
   </data>
+  <data name="INVALID_CPF" xml:space="preserve">
+    <value>Invalid CPF</value>
+  </data>
   <data name="INVALID_EMAIL" xml:space="preserve">
     <value>Invalid email</value>
   </data>

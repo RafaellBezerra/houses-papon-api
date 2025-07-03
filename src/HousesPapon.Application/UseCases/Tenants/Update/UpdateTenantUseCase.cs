@@ -1,7 +1,6 @@
 ﻿using FluentValidation.Results;
 using HousesPapon.Communication.Requests.Tenants;
 using HousesPapon.Domain.Repositories.CommomUtilities;
-using HousesPapon.Domain.Repositories.House;
 using HousesPapon.Domain.Repositories.Tenant;
 using HousesPapon.Exception;
 using HousesPapon.Exception.Resources;
@@ -31,10 +30,10 @@ namespace HousesPapon.Application.UseCases.Tenants.Update
             tenant.PayDay = request.PayDay;
             tenant.HouseId = request.HouseId;
             tenant.IsInDebit = request.PayDay.Date < DateTime.UtcNow.Date;
+            tenant.CPF = request.CPF;
 
             _repository.Update(tenant);
             await _unitOfWork.Commit();
-            
         }
 
         private async Task Validate(RequestTenant request)

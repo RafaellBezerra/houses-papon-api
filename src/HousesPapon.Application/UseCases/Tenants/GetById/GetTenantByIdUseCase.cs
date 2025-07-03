@@ -25,7 +25,8 @@ namespace HousesPapon.Application.UseCases.Tenants.GetById
                 IsInDebit = tenant.IsInDebit,
                 Name = tenant.Name,
                 PayDay = tenant.PayDay,
-                HouseId = tenant.HouseId
+                HouseId = tenant.HouseId,
+                CPF = tenant.CPF
             };
         }
     }

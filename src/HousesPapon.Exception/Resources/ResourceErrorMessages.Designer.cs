@@ -124,6 +124,15 @@ namespace HousesPapon.Exception.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Invalid CPF.
+        /// </summary>
+        public static string INVALID_CPF {
+            get {
+                return ResourceManager.GetString("INVALID_CPF", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Invalid email.
         /// </summary>
         public static string INVALID_EMAIL {

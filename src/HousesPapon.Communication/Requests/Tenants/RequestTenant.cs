@@ -6,5 +6,6 @@
         public DateTime PayDay { get; set; }
         public DateTime EntranceDate { get; set; }
         public long HouseId { get; set; }
+        public string CPF { get; set; } = string.Empty;
     }
 }

@@ -32,6 +32,7 @@ namespace HousesPapon.Application.UseCases.Tenants.Create
                 EntranceDate = request.EntranceDate,
                 PayDay = request.PayDay,
                 HouseId = request.HouseId,
+                CPF = request.CPF
             };
             tenant.IsInDebit = tenant.PayDay.Date < DateTime.UtcNow.Date;
 
@@ -46,7 +47,8 @@ namespace HousesPapon.Application.UseCases.Tenants.Create
                 CreatedAt = tenant.CreatedAt,
                 EntranceDate = tenant.EntranceDate,
                 IsInDebit = tenant.IsInDebit,
-                HouseId = tenant.HouseId
+                HouseId = tenant.HouseId,
+                CPF = tenant.CPF
             };
         }
 

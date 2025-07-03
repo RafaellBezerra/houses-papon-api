@@ -24,6 +24,7 @@ namespace HousesPapon.Application.UseCases.Tenants.GetAll
                 Name = x.Name,
                 PayDay = x.PayDay,
                 HouseId = x.HouseId,
+                CPF = x.CPF,
             }).ToList();
         }
     }

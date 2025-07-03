@@ -8,6 +8,7 @@
         public DateTime PayDay { get; set; }
         public DateTime EntranceDate { get; set; }
         public DateTime CreatedAt { get; set; }
+        public string CPF { get; set; } = string.Empty;
 
         public House House { get; set; } = default!;
         public long HouseId { get; set; }
