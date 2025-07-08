@@ -29,15 +29,6 @@ Among the NuGet packages used, **FluentValidation** implements validation rules 
 This API is deployed on [Railway](https://railway.app), providing a cloud-hosted environment for running and testing the application.  
 Note: API endpoints require cookie-based authentication and access to the production database, which is restricted for security reasons.
 
-## Getting Started
-
-To install and run a local copy, follow these simple steps.
-
-### Requirements
-
-- Visual Studio version 2022+ or Visual Studio Code
-- Windows 10+ or ​​Linux/Mac OS with [.NET SDK](https://dotnet.microsoft.com/en-us/download/dotnet/8.0) installed
-- MySQL Server
 
 [badge-dotnet]: https://img.shields.io/badge/.NET-512BD4?logo=dotnet&logoColor=fff&style=for-the-badge
 [badge-vs]: https://img.shields.io/badge/VISUAL%20STUDIO-%235c2d91?style=for-the-badge
