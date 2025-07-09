@@ -13,23 +13,28 @@ using HousesPapon.Infrastructure.DataAccess.Repositories.CommonUtilities;
 using HousesPapon.Infrastructure.Security.Cookies;
 using HousesPapon.Infrastructure.Security.Cryptografy;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 
 namespace HousesPapon.Infrastructure
 {
     public static class DependencyInjection
     {
-        public static void AddInfrastructure(this IServiceCollection services)
+        public static void AddInfrastructure(this IServiceCollection services, IConfiguration configurationt)
         {
-            AddDbContext(services);
+            AddDbContext(services, configurationt);
             AddRepositories(services);
 
             services.AddScoped<IPasswordEncripter, PasswordEncripter>();
         }
 
-        private static void AddDbContext(IServiceCollection services)
+        private static void AddDbContext(IServiceCollection services, IConfiguration configurationt)
         {
             var connectionString = Environment.GetEnvironmentVariable("MYSQLCONNECTION");
+
+            connectionString ??= configurationt.GetConnectionString("DefaultConnection");
+
             var version = new MySqlServerVersion(new Version(8, 0, 41));
 
             services.AddDbContext<HousesPaponDbContext>(x => x.UseMySql(connectionString, version));

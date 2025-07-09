@@ -6,8 +6,11 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 
 var builder = WebApplication.CreateBuilder(args);
 
-var port = Environment.GetEnvironmentVariable("PORT") ?? "8080";
-builder.WebHost.UseUrls($"http://*:{port}");
+if (builder.Environment.IsProduction())
+{
+    var port = Environment.GetEnvironmentVariable("PORT") ?? "8080";
+    builder.WebHost.UseUrls($"http://*:{port}");
+}
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
@@ -19,7 +22,7 @@ builder.Services.AddAuthentication(config =>
     config.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
 }).AddCookie(config =>
 {
-    config.Cookie.Name = ".Test.cookieR";
+    config.Cookie.Name = ".MyApp.AuthCookie";
     config.Cookie.HttpOnly = true;
     config.Cookie.SecurePolicy = CookieSecurePolicy.Always;
     config.Cookie.SameSite = SameSiteMode.Strict;
@@ -30,7 +33,7 @@ builder.Services.AddAuthentication(config =>
 builder.Services.AddRouting(x => x.LowercaseUrls = true);
 builder.Services.AddMvc(f => f.Filters.Add(typeof(ExceptionFilter)));
 
-builder.Services.AddInfrastructure();
+builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services.AddApplication();
 
 var app = builder.Build();
@@ -38,7 +41,8 @@ var app = builder.Build();
 app.UseSwagger();
 app.UseSwaggerUI();
 
-//app.UseHttpsRedirection();
+if (app.Environment.IsDevelopment()) 
+    app.UseHttpsRedirection();
 
 app.UseAuthentication();
 app.UseAuthorization();
