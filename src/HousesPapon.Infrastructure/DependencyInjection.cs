@@ -21,19 +21,19 @@ namespace HousesPapon.Infrastructure
 {
     public static class DependencyInjection
     {
-        public static void AddInfrastructure(this IServiceCollection services, IConfiguration configurationt)
+        public static void AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {
-            AddDbContext(services, configurationt);
+            AddDbContext(services, configuration);
             AddRepositories(services);
 
             services.AddScoped<IPasswordEncripter, PasswordEncripter>();
         }
 
-        private static void AddDbContext(IServiceCollection services, IConfiguration configurationt)
+        private static void AddDbContext(IServiceCollection services, IConfiguration configuration)
         {
             var connectionString = Environment.GetEnvironmentVariable("MYSQLCONNECTION");
 
-            connectionString ??= configurationt.GetConnectionString("DefaultConnection");
+            if (string.IsNullOrEmpty(connectionString)) connectionString = configuration.GetConnectionString("DefaultConnection");
 
             var version = new MySqlServerVersion(new Version(8, 0, 41));
 
