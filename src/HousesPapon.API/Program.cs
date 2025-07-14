@@ -25,9 +25,21 @@ builder.Services.AddAuthentication(config =>
     config.Cookie.Name = ".MyApp.AuthCookie";
     config.Cookie.HttpOnly = true;
     config.Cookie.SecurePolicy = CookieSecurePolicy.Always;
-    config.Cookie.SameSite = SameSiteMode.Strict;
+    config.Cookie.SameSite = SameSiteMode.None;
     config.ExpireTimeSpan = TimeSpan.FromMinutes(1000);
     config.SlidingExpiration = true;
+});
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("PoliticaCorsSegura", policy =>
+    {
+        policy
+            .WithOrigins("http://localhost:3000")
+            .AllowAnyHeader()
+            .AllowAnyMethod()
+            .AllowCredentials();
+    });
 });
 
 builder.Services.AddRouting(x => x.LowercaseUrls = true);
@@ -44,6 +56,7 @@ app.UseSwaggerUI();
 if (app.Environment.IsDevelopment()) 
     app.UseHttpsRedirection();
 
+app.UseCors("PoliticaCorsSegura");
 
 app.UseAuthentication();
 app.UseAuthorization();
