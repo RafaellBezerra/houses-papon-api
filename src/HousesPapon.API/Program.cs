@@ -24,7 +24,7 @@ builder.Services.AddAuthentication(config =>
 {
     config.Cookie.Name = ".MyApp.AuthCookie";
     config.Cookie.HttpOnly = true;
-    config.Cookie.SecurePolicy = CookieSecurePolicy.Always;
+    config.Cookie.SecurePolicy = CookieSecurePolicy.SameAsRequest;
     config.Cookie.SameSite = SameSiteMode.None;
     config.ExpireTimeSpan = TimeSpan.FromMinutes(1000);
     config.SlidingExpiration = true;
@@ -35,7 +35,7 @@ builder.Services.AddCors(options =>
     options.AddPolicy("PoliticaCorsSegura", policy =>
     {
         policy
-            .WithOrigins("https://localhost:3000")
+            .WithOrigins("http://localhost:3000")
             .AllowAnyHeader()
             .AllowAnyMethod()
             .AllowCredentials();
