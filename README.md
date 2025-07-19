@@ -3,6 +3,7 @@
 This API, developed with **.NET 8** and following the principles of **Domain-Driven Design (DDD)**, provides a well-structured and efficient solution for managing rental properties and tenant-related operations. It acts as a rental management system where users can add tenants associated with homes, manage rental agreements, and handle payments associated with tenants, all stored securely in a **MySQL** database.
 
 The architecture is based on **REST** standards, using standard **HTTP methods** to provide a clean and intuitive communication layer. It is also enhanced with **Swagger documentation**, offering an interactive and user-friendly interface for developers to explore and test the API endpoints.
+⚠️ Authentication is currently performed via session cookies, which implies state storage on the server and does not characterize a 100% stateless RESTful implementation.
 
 Among the NuGet packages used, **FluentValidation** implements validation rules in a clean and maintainable way. **Entity Framework Core** acts as the ORM, simplifying database interactions by using .NET objects instead of raw SQL queries.
 
