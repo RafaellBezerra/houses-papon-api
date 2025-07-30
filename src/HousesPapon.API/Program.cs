@@ -24,8 +24,13 @@ builder.Services.AddAuthentication(config =>
 {
     config.Cookie.Name = "houses-papon-session";
     config.Cookie.HttpOnly = true;
-    config.Cookie.SecurePolicy = CookieSecurePolicy.Always;
-    config.Cookie.SameSite = SameSiteMode.Lax;
+
+    if (builder.Environment.IsProduction())
+        config.Cookie.SecurePolicy = CookieSecurePolicy.Always;
+    else
+        config.Cookie.SecurePolicy = CookieSecurePolicy.None;
+
+    config.Cookie.SameSite = SameSiteMode.None;
     config.ExpireTimeSpan = TimeSpan.FromMinutes(10080);
     config.SlidingExpiration = true;
     config.Cookie.Path = "/";
