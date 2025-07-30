@@ -22,12 +22,13 @@ builder.Services.AddAuthentication(config =>
     config.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
 }).AddCookie(config =>
 {
-    config.Cookie.Name = ".MyApp.AuthCookie";
+    config.Cookie.Name = "houses-papon-session";
     config.Cookie.HttpOnly = true;
-    config.Cookie.SecurePolicy = CookieSecurePolicy.SameAsRequest;
-    config.Cookie.SameSite = SameSiteMode.None;
-    config.ExpireTimeSpan = TimeSpan.FromMinutes(1000);
+    config.Cookie.SecurePolicy = CookieSecurePolicy.Always;
+    config.Cookie.SameSite = SameSiteMode.Lax;
+    config.ExpireTimeSpan = TimeSpan.FromMinutes(10080);
     config.SlidingExpiration = true;
+    config.Cookie.Path = "/";
 });
 
 builder.Services.AddCors(options =>
